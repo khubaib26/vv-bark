@@ -1,7 +1,7 @@
 
 ## How to run the code
-- git clone https://github.com/ajayyadavexpo/laravel-starter.git
-- cd laravel-starter
+- git clone https://github.com/khubaib26/vv-bark.git
+- cd vv-bark
 - cp .env.example `.env`
 - open .env and update DB_DATABASE (database details)
 - run : `composer install`
