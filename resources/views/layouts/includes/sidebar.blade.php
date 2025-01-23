@@ -1,193 +1,126 @@
-<aside id="sidebar" class="sidebar">
+<div class="page-sidebar">
+    <div class="main-header-left d-none d-lg-block">
+        <div class="logo-wrapper"><a href="index.html"><img class="blur-up lazyloaded" src="https://themes.pixelstrap.com/multikart/back-end/assets/images/dashboard/multikart-logo.png" alt></a></div>
+    </div>
+    <div class="sidebar custom-scrollbar" style="background-color: black;">
+        <a href="javascript:void(0)" class="sidebar-back d-lg-none d-block"><i class="fa fa-times" aria-hidden="true"></i></a>
+        <ul class="sidebar-menu">
 
-    <ul class="sidebar-nav" id="sidebar-nav">
+            <li>
+                <a class="sidebar-header" href="{{ route('admin.dashboard') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive">
+                        <polyline points="21 8 21 21 3 21 3 8"></polyline>
+                        <rect x="1" y="3" width="22" height="5"></rect>
+                        <line x1="10" y1="12" x2="14" y2="12"></line>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            @canany('Role access','Role add','Role edit','Role delete')
+            <li>
+                <a class="sidebar-header" href="{{ route('admin.roles.index') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>Role</span>
+                </a>
+            </li>
+            @endcanany
 
-      <li class="nav-item">
-        <a class="nav-link " href="{{ route('admin.dashboard') }}">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
 
-      <?php /*
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-person"></i><span>User Management</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="components-alerts.html">
-              <i class="bi bi-circle"></i><span>Users List</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-alerts.html">
-              <i class="bi bi-circle"></i><span>Users List</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-accordion.html">
-              <i class="bi bi-circle"></i><span>Add New User</span>
-            </a>
-          </li>
+            @canany('Permission access','Permission add','Permission edit','Permission delete')
+            <li>
+                <a class="sidebar-header" href="{{ route('admin.permissions.index') }}">
+                    <!-- Updated SVG for Permissions (Key Icon) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-key">
+                        <circle cx="7.5" cy="15.5" r="5.5"></circle>
+                        <line x1="21" y1="2" x2="11.5" y2="11.5"></line>
+                        <line x1="16" y1="7" x2="20" y2="7"></line>
+                        <line x1="18" y1="5" x2="18" y2="9"></line>
+                    </svg>
+                    <span>Permission</span>
+                </a>
+            </li>
+            @endcanany
+
+            @canany('User access','User add','User edit','User delete')
+            <li>
+                <a class="sidebar-header" href="{{ route('admin.users.index') }}">
+                    <!-- Updated SVG for Users (User Icon) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <span>Users</span>
+                </a>
+            </li>
+            @endcanany
+
+            @canany('Category access','Category add','Category edit','Category delete')
+            <li>
+                <a class="sidebar-header" href="{{ route('admin.categories.index') }}">
+                    <!-- Updated SVG for Categories (Grid Icon) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span>Categories</span>
+                </a>
+            </li>
+            @endcanany
+
+            @canany('Brand access','Brand add','Brand edit','Brand delete')
+            <li>
+                <a class="sidebar-header" href="{{ route('admin.brands.index') }}">
+                    <!-- Updated SVG for Brands (Tag Icon) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag">
+                        <path d="M20 12v6a2 2 0 0 1-2 2h-6"></path>
+                        <path d="M12 2H6a2 2 0 0 0-2 2v6"></path>
+                        <line x1="2" y1="2" x2="22" y2="22"></line>
+                    </svg>
+                    <span>Brands</span>
+                </a>
+            </li>
+            @endcanany
+
+            @canany('Lead access','Lead add','Lead edit','Lead delete')
+            <li>
+                <a class="sidebar-header" href="{{ route('admin.leads.index') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive">
+                        <polyline points="21 8 21 21 3 21 3 8"></polyline>
+                        <rect x="1" y="3" width="22" height="5"></rect>
+                        <line x1="10" y1="12" x2="14" y2="12"></line>
+                    </svg>
+                    <span>Leads</span>
+                </a>
+            </li>
+            @endcanany
+            <li>
+                <a class="sidebar-header" href="pages-error-404.html">
+                    <!-- Updated SVG for 404 (Alert Triangle Icon) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <span>404</span>
+                </a>
+            </li>
+            <li>
+                <a class="sidebar-header" href="pages-blank.html">
+                    <!-- Updated SVG for Blank Page (File Icon) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <span>Blank</span>
+                </a>
+            </li>
         </ul>
-      </li><!-- End Components Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-bootstrap"></i><span>Brand Management</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Brands List</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Add New Brand</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Forms Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>General Tables</span>
-            </a>
-          </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Data Tables</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Tables Nav -->
-      
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="charts-chartjs.html">
-              <i class="bi bi-circle"></i><span>Chart.js</span>
-            </a>
-          </li>
-          <li>
-            <a href="charts-apexcharts.html">
-              <i class="bi bi-circle"></i><span>ApexCharts</span>
-            </a>
-          </li>
-          <li>
-            <a href="charts-echarts.html">
-              <i class="bi bi-circle"></i><span>ECharts</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Charts Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="icons-bootstrap.html">
-              <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
-            </a>
-          </li>
-          <li>
-            <a href="icons-remix.html">
-              <i class="bi bi-circle"></i><span>Remix Icons</span>
-            </a>
-          </li>
-          <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Boxicons</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Icons Nav -->
-
-      <li class="nav-heading">Pages</li>
-       */ ?>
-
-      @canany('Role access','Role add','Role edit','Role delete')
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('admin.roles.index') }}">
-          <i class="bi bi-person-lock"></i>
-          <span>Role</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
-      @endcanany
-
-      @canany('Permission access','Permission add','Permission edit','Permission delete')
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('admin.permissions.index') }}">
-          <i class="bi bi-person-lock"></i>
-          <span>Permission</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
-      @endcanany
-
-      @canany('User access','User add','User edit','User delete')
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('admin.users.index')}}">
-          <i class="bi bi-person"></i>
-          <span>User</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-      @endcanany
-      
-      @canany('Category access','Category add','Category edit','Category delete')
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('admin.categories.index')}}">
-          <i class="bi bi-envelope"></i>
-          <span>Category</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
-      @endcanany
-
-      @canany('Brand access','Brand add','Brand edit','Brand delete')
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('admin.brands.index')}}">
-          <i class="bi bi-card-list"></i>
-          <span>Brand</span>
-        </a>
-      </li><!-- End Register Page Nav -->
-      @endcanany
-
-      @canany('Lead access','Lead add','Lead edit','Lead delete')
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('admin.leads.index')}}">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Leads</span>
-        </a>
-      </li><!-- End Login Page Nav -->
-      @endcanany
-
-      @canany('Mail access','Mail edit')
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-error-404.html">
-          <i class="bi bi-dash-circle"></i>
-          <span>Error 404</span>
-        </a>
-      </li><!-- End Error 404 Page Nav -->
-      @endcanany
-      
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
-          <i class="bi bi-file-earmark"></i>
-          <span>Blank</span>
-        </a>
-      </li><!-- End Blank Page Nav -->
-
-    </ul>
-
-  </aside>
+    </div>
+</div>
