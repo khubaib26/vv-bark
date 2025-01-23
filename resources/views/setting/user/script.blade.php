@@ -1,3 +1,4 @@
+
 <script>
 
 
@@ -11,15 +12,19 @@ $(document).ready(function(){
             type: "GET",
             dataType: "json",
             url: "{{ route('admin.userStatus') }}",
-            data: {'status': status, 'user_id': user_id},
-            success: function(data){
-                //swal("Good job!", "Status change successfully!", "success");
-                console.log(data.success)
+            data: {
+                '_token': '{{ csrf_token() }}',
+                'status': status,
+                'user_id': user_id
             },
-            error: function(){
-                //swal("Error!", "Request Fail!", "error");
+            success: function(data) {
+                console.log(data.success);
+            },
+            error: function(xhr) {
+                console.error(xhr.responseText); // Log the server error
             }
         });
+
     });   
 });
 

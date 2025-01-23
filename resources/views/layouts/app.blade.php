@@ -2,78 +2,61 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="{{ asset('assets/img/favicon.png')}}" rel="icon">
-  <link href="{{ asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet">
-
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Bark</title>
+    <meta name="robots" content="index, follow">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('logo.png') }}">
+    <!-- Google font-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.css') }}">
+    <!-- App css-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/flag-icon.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    {{-- Fancy Box Links --}}
+    <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 </head>
 
 <body>
-  <!-- ======= Header ======= -->
-  @include('layouts.includes.header');
-  <!-- End Header -->
+    <div class="page-wrapper">
+        <!-- ======= Header ======= -->
+        @yield('header')
+        <!-- End Header -->
+        <div class="page-body-wrapper">
+            <!-- ======= Sidebar ======= -->
+            @yield('sidebar')
+            <!-- End Sidebar-->
 
-  <!-- ======= Sidebar ======= -->
-  @include('layouts.includes.sidebar');
-  <!-- End Sidebar-->
+            <!-- Start main -->
+            <div class="page-body">
+                @yield('content')
+            </div>
+            <!-- End #main -->
 
-  <!-- Start main -->
-    @yield('content')
-  <!-- End #main -->
+            <!-- ======= Footer ======= -->
+            @yield('footer')
+            <!-- End Footer -->
+        </div>
+    </div>
+    <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/feather-icon.js') }}"></script>
+    <script src="{{ asset('assets/js/sidebar-menu.js') }}"></script>
+    <!-- <script src="assets/js/admin-customizer.js"></script> -->
+    <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
+    <script src="{{ asset('assets/js/admin-script.js') }}"></script>
 
-  <!-- ======= Footer ======= -->
-  @include('layouts.includes.footer');
-  <!-- End Footer -->
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/chart.js/chart.umd.js')}}"></script>
-  <script src="{{ asset('assets/vendor/echarts/echarts.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/quill/quill.js')}}"></script>
-  <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
-  <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
-
-  <!-- Template Main JS File -->
-  <script src="{{ asset('assets/js/main.js')}}"></script>
-  
-  <!-- cxm Scripts -->
-  @stack('cxmScripts')
+    <!-- cxm Scripts -->
+    @stack('cxmScripts')
 
 </body>
 

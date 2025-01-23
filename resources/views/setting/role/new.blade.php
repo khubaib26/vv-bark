@@ -1,62 +1,63 @@
 @extends('layouts.app')
 
-@section('cxmTitle', 'New Roles')
+@section('header')
+@include('layouts.includes.header')
+@endsection
+
+@section('sidebar')
+@include('layouts.includes.sidebar')
+@endsection
 
 @section('content')
-
-<main id="main" class="main">
-    <div class="pagetitle">
-      <h1>Roles</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-          <li class="breadcrumb-item">Roles</li>
-          <li class="breadcrumb-item active">New</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-        <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Add New Role</h5>
-          
-              <!-- Custom Styled Validation -->
-              <form class="row g-3 needs-validation" method="POST" action="{{ route('admin.roles.store')}}" novalidate>
-              @csrf
-              @method('post')
-                <div class="col-md-12">
-                  <label for="validationCustom01" class="form-label">Role Name</label>
-                  <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter role" class="form-control" id="validationCustom01"  required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="page-header-left">
+                    <h3>Dashboard</h3>
                 </div>
-                <div class="col-12">
-                <label for="validationCustom01" class="form-label">Permissions</label>
-                  <div class="form-check">
-                  @foreach($permissions as $permission)
-                    <div class="flex flex-col justify-cente">
-                          <div class="flex flex-col">
-                              <label class="inline-flex items-center mt-3">
-                                  <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" name="permissions[]" value="{{$permission->id}}"
-                                  ><span class="ml-2 text-gray-700">{{ $permission->name }}</span>
-                              </label>
-                          </div>
-                      </div>
-                  @endforeach  
-                  </div>
-                </div>
-                <div class="col-12">
-                  <button class="btn btn-primary" type="submit">Submit</button>
-                </div>
-              </form><!-- End Custom Styled Validation -->
-
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">Roles</li>
+                    <li class="breadcrumb-item active">New</li>
+                </ul>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
-</main><!-- End #main -->
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-heder">Add New Role</h5>
+                    <form class="row g-3 needs-validation" method="POST" action="{{ route('admin.roles.store')}}" novalidate>
+                        @csrf
+                        @method('post')
+                        <div class="col-lg-12">
+                            <label for="validationCustom01" class="form-label">Role Name</label>
+                            <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter role" class="form-control" id="validationCustom01" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="validationCustom02" class="form-label">Permissions</label>
+                            <div class="form-check d-flex flex-wrap">
+                                @foreach($permissions as $permission)
+                                <div class="form-check me-3 mb-2">
+                                    <input type="checkbox" class="form-check-input p-2" name="permissions[]" value="{{ $permission->id }}" id="permission-{{ $permission->id }}">
+                                    <label class="form-check-label p-1" for="permission-{{ $permission->id }}">{{ $permission->name }}</label>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
