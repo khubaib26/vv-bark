@@ -94,6 +94,7 @@ class CategoryController extends Controller
         // validation 
         $validated = $request->validate([
             'name'=>'required',
+            'publish' => 'required',
         ]);
 
         $category->update($validated);
