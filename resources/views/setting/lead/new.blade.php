@@ -1,62 +1,78 @@
-<x-app-layout>
-   <div>
-        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-            <div class="container mx-auto px-6 py-1">
-              <div class="bg-white shadow-md rounded my-6 p-5">
-                <form method="POST" action="{{ route('admin.brands.store')}}">
-                  @csrf
-                  @method('post')
+@extends('layouts.app')
 
-                <div class="flex flex-col space-y-2">
-                  <label for="category" class="text-gray-700 select-none font-medium">Select Category</label>
-                  <select class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none" name="category_id">
-                      <option value="">Select Category</option>
-                      @foreach($categories as $category)
-                      <option value="{{$category->id}}">{{$category->name}}</option>
-                      @endforeach
-                  </select>
+@section('header')
+@include('layouts.includes.header')
+@endsection
+
+@section('sidebar')
+@include('layouts.includes.sidebar')
+@endsection
+
+@section('content')
+
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="page-header-left">
+                    <h3>Dashboard
+                    </h3>
                 </div>
-                <div class="flex flex-col space-y-2">
-                  <label for="role_name" class="text-gray-700 select-none font-medium">Brand Name</label>
-                  <input id="role_name" type="text" name="name" value="{{ old('name') }}"
-                    placeholder="Enter Brand Name"
-                    class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                  />
-                </div>
-                <div class="flex flex-col space-y-2">
-                  <label for="role_name" class="text-gray-700 select-none font-medium">Brand URL</label>
-                  <input id="role_name" type="url" name="brand_url" value="{{ old('name') }}"
-                    placeholder="Enter Brand Name"
-                    class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                  />
-                </div>
-                <div class="flex flex-col space-y-2">
-                  <label for="role_name" class="text-gray-700 select-none font-medium">Brand Logo URL</label>
-                  <input id="role_name" type="url" name="brand_logo_url" value="{{ old('name') }}"
-                    placeholder="Enter Brand Name"
-                    class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                  />
-                </div>
-                <div class="flex flex-col space-y-2">
-                  <label for="role_name" class="text-gray-700 select-none font-medium">Brand Fav URL</label>
-                  <input id="role_name" type="url" name="brand_fav_url" value="{{ old('name') }}"
-                    placeholder="Enter Brand Name"
-                    class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                  />
-                </div>
-                <div class="flex flex-col space-y-2">
-                  <label for="role_name" class="text-gray-700 select-none font-medium">Publish</label>
-                  <select class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none" name="publish">
-                      <option value="0">Draft</option>
-                      <option value="1">Publish</option>
-                  </select>
-                </div>
-                <div class="text-center mt-16">
-                  <button type="submit" class="bg-blue-500 text-white font-bold px-5 py-1 rounded focus:outline-none shadow hover:bg-blue-500 transition-colors ">Submit</button>
-                </div>
-              </div>
+                <li class="breadcrumb-item">Categories</li>
+                <li class="breadcrumb-item active">List</li>
             </div>
-        </main>
+        </div>
     </div>
 </div>
-</x-app-layout>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{{ route('admin.brands.store')}}">
+                        @csrf
+                        @method('post')
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="category" class="mt-2">Select Category</label>
+                                <select class="form-select" name="category_id">
+                                    <option value="">Select Category</option>
+                                    @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="role_name" class="mt-2">Brand Name</label>
+                                <input id="role_name" type="text" name="name" value="{{ old('name') }}" placeholder="Enter Brand Name" class="form-control" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="role_name" class="mt-2">Brand URL</label>
+                                <input id="role_name" type="url" name="brand_url" value="{{ old('name') }}" placeholder="Enter Brand Name" class="form-control" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="role_name" class="mt-2">Brand Logo URL</label>
+                                <input id="role_name" type="url" name="brand_logo_url" value="{{ old('name') }}" placeholder="Enter Brand Name" class="form-control" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="role_name" class="mt-2">Brand Fav URL</label>
+                                <input id="role_name" type="url" name="brand_fav_url" value="{{ old('name') }}" placeholder="Enter Brand Name" class="form-control" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="role_name" class="mt-2">Publish</label>
+                                <select class="form-select" name="publish">
+                                    <option value="0">Draft</option>
+                                    <option value="1">Publish</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mt-3">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

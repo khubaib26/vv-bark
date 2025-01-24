@@ -31,7 +31,7 @@
                 <div class="card-body">
                     @can('User create')
                     <h5 class="card-title" style="text-align:right;">
-                        <a href="{{route('admin.users.create')}}" class="btn btn-success"><i class="bi bi-plus-lg"></i>New User</a>
+                        <a href="{{route('admin.users.create')}}" class="btn btn-success"><i class="fa fa-plus-lg"></i>New User</a>
                     </h5>
                     @endcan
 
@@ -66,23 +66,25 @@
                                 <td>
 
                                     <div class="form-check form-switch">
-                                        <input data-id="{{$user->id}}" type="checkbox" class="form-check-input toggle-class" id="customSwitch{{$user->id}}" {{ $user->active ? 'checked' : '' }}>
+                                        <input data-id="{{$user->id}}" type="checkbox" class="form-check-input toggle-class" style="height: 20px; width:3em;" id="customSwitch{{$user->id}}" {{ $user->active ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="customSwitch{{$user->id}}"></label>
                                     </div>
 
                                 </td>
                                 <td>
+                                    <div class="d-flex flex-row">
                                     @can('User edit')
-                                    <a href="{{route('admin.users.edit',$user->id)}}" class="btn btn-success"><i class="bi bi-pencil"></i></a>
+                                    <a href="{{route('admin.users.edit',$user->id)}}" class="btn-sm btn-success"><i class="fa fa-pencil text-white"></i></a>
                                     @endcan
 
                                     @can('User delete')
                                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="inline">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                        <button class="btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                     </form>
                                     @endcan
+                                </div>
                                 </td>
                             </tr>
                             @endforeach

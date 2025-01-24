@@ -2,133 +2,87 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Login</title>
+    <meta name="robots" content="index, follow">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('logo.png') }}">
+    <!-- Google font-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.css') }}">
+    <!-- App css-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/flag-icon.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://themes.pixelstrap.com/multikart/back-end/assets/css/vendors/slick.css">
+    <link rel="stylesheet" type="text/css" href="https://themes.pixelstrap.com/multikart/back-end/assets/css/vendors/slick-theme.css">
 
-  <title>Pages / Login - NiceAdmin Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="{{ asset('assets/img/favicon.png')}}" rel="icon">
-  <link href="{{ asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
 
-  <main>
-    <div class="container">
 
-      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+    <div class="page-wrapper">
+        <div class="authentication-box">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 p-0 card-left">
+                        <div class="card bg-primary">
+                            <div class="svg-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" fill="currentColor" class="bi bi-app-indicator" viewBox="0 0 16 16">
+                                    <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1z" />
+                                    <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                </svg>
+                            </div>
 
-              <div class="d-flex justify-content-center py-4">
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">NiceAdmin</span>
-                </a>
-              </div><!-- End Logo -->
-
-              <div class="card mb-3">
-
-                <div class="card-body">
-
-                  <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                    <p class="text-center small">Enter your username & password to login</p>
-                  </div>
-
-                  <form class="row g-3 needs-validation" method="POST" action="{{ route('admin.login') }}">
-                  @csrf
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="email" name="email" id="email" class="form-control" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
-                      </div>
+                            <div style="width: 100%; display: inline-block;">
+                                <div>
+                                    <h3>Welcome to Bark</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="col-md-7 p-0 card-right">
+                        <div class="card tab2-card card-login">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="top-profile-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-controls="top-profile" aria-selected="true"><span class="icon-user me-2"></span>Login</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="top-tabContent">
+                                    <div class="tab-pane fade show active" id="top-profile" role="tabpanel" aria-labelledby="top-profile-tab">
+                                        <form class="form-horizontal auth-form" action="{{ route('admin.login') }}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input required="" name="email" type="email" class="form-control" placeholder="Username" id="exampleInputEmail1">
+                                            </div>
+                                            <div class="form-group">
+                                                <input required="" name="password" type="password" class="form-control" placeholder="Password">
+                                            </div>
+                                            <div class="form-button">
+                                                <button class="btn btn-primary" type="submit">Login</button>
+                                            </div>
 
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" id="password" class="form-control" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
-                    </div>
+                                        </form>
+                                    </div>
 
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
-                      </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-12">
-                      <button type="submit" class="btn btn-primary w-100" type="submit">Login</button>
-                    </div>
-                    <!--<div class="col-12">
-                      <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p>
-                    </div>-->
-                  </form>
-
                 </div>
-              </div>
-
-              <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-              </div>
-
+                
             </div>
-          </div>
         </div>
-
-      </section>
-
     </div>
-  </main><!-- End #main -->
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/chart.js/chart.umd.js')}}"></script>
-  <script src="{{ asset('assets/vendor/echarts/echarts.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/quill/quill.js')}}"></script>
-  <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
-  <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
-
-  <!-- Template Main JS File -->
-  <script src="{{ asset('assets/js/main.js')}}"></script>
 
 </body>
 
