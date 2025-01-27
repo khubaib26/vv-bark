@@ -73,18 +73,19 @@
                                 </td>
                                 <td>
                                     <div class="d-flex flex-row">
-                                    @can('User edit')
-                                    <a href="{{route('admin.users.edit',$user->id)}}" class="btn-sm btn-success"><i class="fa fa-pencil text-white"></i></a>
-                                    @endcan
+                                        @can('User edit')
+                                        <a href="{{route('admin.users.edit',$user->id)}}" class="btn-sm btn-success"><i class="fa fa-pencil text-white"></i></a>
+                                        @endcan
 
-                                    @can('User delete')
-                                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                                    </form>
-                                    @endcan
-                                </div>
+                                        @can('User delete')
+                                        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                        </form>
+                                        @endcan
+                                        <button type="button" data-id="{{$user->id}}" class="btn-sm btn-primary userCredit" data-bs-toggle="modal" data-bs-target="#creditModal"><i class="fa-solid fa-credit-card"></i></i></button>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
@@ -97,6 +98,41 @@
         </div>
     </div>
 </div>
+
+<!-- The Modal -->
+<div class="modal modal-dialog-scrollable" id="creditModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <form method="POST" id="UserCreditForm">
+        <input type="hidden" id="user_hdn" class="form-control" name="user_id" value="">
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="role_name" class="mt-2">Select Month</label>
+                    <input id="role_name" type="date" name="month" class="form-control" />
+                </div>
+                <div class="col-lg-6">
+                    <label for="role_name" class="mt-2">Credits</label>
+                    <input id="role_name" type="number" name="credits" placeholder="Enter Credits" class="form-control" />
+                </div>  
+            </div>
+            <div class="col-lg-12 mt-3">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
 @push('cxmScripts')
 @include('setting.user.script')

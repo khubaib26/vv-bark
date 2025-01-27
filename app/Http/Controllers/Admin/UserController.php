@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserCredit;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -151,5 +152,27 @@ class UserController extends Controller
         $user->save();
 
         return response()->json(['success'=>'Status change successfully.']);
+    }
+
+    //create user Credits
+    public function createUserCredit(Request $request){
+        
+        $unUsedCredit = UserCredit::where('user_id',$request->user_id)->latest()->value('unused_credits');
+        
+        if(empty($unUsedCredit)){
+            $unUsed = $request->credits;
+        }else{
+            $unUsed = $unUsedCredit + $request->credits;
+        }
+
+        $credit = UserCredit::create([
+            'user_id'=>$request->user_id,
+            'month'=>$request->month,
+            'total_credits'=>$request->credits,
+            'unused_credits' => $unUsed
+        ]);
+
+        return response()->json(['success'=>'Store Credit successfully.']);
+       
     }
 }
