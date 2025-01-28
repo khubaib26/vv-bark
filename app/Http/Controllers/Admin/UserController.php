@@ -157,18 +157,21 @@ class UserController extends Controller
     //create user Credits
     public function createUserCredit(Request $request){
         
-        $unUsedCredit = UserCredit::where('user_id',$request->user_id)->latest()->value('unused_credits');
+        $UsedCredit = UserCredit::where('user_id',$request->user_id)->latest()->first();
         
-        if(empty($unUsedCredit)){
+        if(empty($UsedCredit)){
             $unUsed = $request->credits;
+            $used = 0;
         }else{
-            $unUsed = $unUsedCredit + $request->credits;
+            $unUsed = $UsedCredit->unused_credits + $request->credits;
+            $used = $UsedCredit->used_credits;
         }
 
         $credit = UserCredit::create([
             'user_id'=>$request->user_id,
             'month'=>$request->month,
-            'total_credits'=>$request->credits,
+            'purchased_credits'=>$request->credits,
+            'used_credits' =>  $used,
             'unused_credits' => $unUsed
         ]);
 

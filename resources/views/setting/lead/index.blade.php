@@ -71,7 +71,7 @@
                                 <td>
                                     @can('Lead assign')
                                     <select class='assingUser form-select' name="assingUser" data-cxm-lead-id="{{$lead->id}}">
-                                        <option value="" disabled>Select User</option>
+                                        <option value="">Select User</option>
                                         @foreach($users as $user)
                                         <option value="{{ $user->id }}" {{ ($user->id == $lead->assing_user_id)  ? 'selected' : '' }}>{{ $user->name }}</option>
                                         @endforeach
@@ -98,6 +98,12 @@
                             @endcan
                         </tbody>
                     </table>
+                   {{-- @can('Lead access')
+                        <div class="dataTables_paginate paging_simple_numbers" id="basic-1_paginate">
+                            {{ $leads->links() }}
+                        </div>
+                    @endcan --}}
+
                     <!-- End Default Table Example -->
                 </div>
             </div>

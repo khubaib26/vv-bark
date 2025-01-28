@@ -18,7 +18,7 @@ class CreateUserCreditsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->date('month');
-            $table->integer('total_credits');
+            $table->integer('purchased_credits');
             $table->integer('used_credits');
             $table->integer('unused_credits');
             $table->softDeletes();

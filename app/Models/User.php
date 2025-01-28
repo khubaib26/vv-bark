@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function credits()
     {
-        return $this->hasMany(UserCredit::class);
+        return $this->hasMany(UserCredit::class)->latest();
     } 
 
 }

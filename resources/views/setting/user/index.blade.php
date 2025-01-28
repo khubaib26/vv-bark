@@ -40,11 +40,11 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">User Name</th>
-                                <th scope="col">Pseudonym</th>
+                                <th scope="col">User Name / Pseudonym </th>
                                 <th scope="col">Designation</th>
                                 <th scope="col">Contact</th>
-                                <th scope="col">Role</th>
+                                <th scope="col">Credits</th>
+                                <th scope="col">Role</th> 
                                 <th>Status</th>
                                 <th scope="col" style="width:200px;">Actions</th>
                             </tr>
@@ -54,22 +54,36 @@
                             @foreach($users as $user)
                             <tr>
                                 <th scope="row">{{ $user->id }}</th>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->pseudonym }}</td>
-                                <td>{{ $user->designation }}</td>
+                                <td>{{ $user->name }} <br>{{ $user->pseudonym }} </td>
+                                <td>
+                                   {{ $user->designation }}<br> 
+                                </td>
                                 <td>{{ $user->email }}<br>{{ $user->phone }}</td>
+                                <td>
+                                @php
+                                    $credits = json_decode($user->credits->first(), true);
+                                    //print_r($credits); 
+                                    if(isset($credits)){
+                                        echo "Used: ". $credits["used_credits"] . "<br>";
+                                        echo "Balance: ". $credits["unused_credits"];
+                                    }
+                                @endphp  
+
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                </td>
                                 <td>
                                     @foreach($user->roles as $role)
                                     <span class="badge rounded-pill bg-primary">{{ $role->name }}</span>
                                     @endforeach
                                 </td>
+                               
                                 <td>
-
                                     <div class="form-check form-switch">
                                         <input data-id="{{$user->id}}" type="checkbox" class="form-check-input toggle-class" style="height: 20px; width:3em;" id="customSwitch{{$user->id}}" {{ $user->active ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="customSwitch{{$user->id}}"></label>
                                     </div>
-
                                 </td>
                                 <td>
                                     <div class="d-flex flex-row">

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Lead;
 use App\Models\User;
 use App\Models\LeadStatus;
+use App\Models\UserCredit;
 use Auth;
 
 class LeadController extends Controller
@@ -33,9 +34,9 @@ class LeadController extends Controller
          
         if(Auth::user()->hasRole('admin'))
         {
-           $leads= Lead::orderBy('id', 'desc')->paginate(10);
+           $leads= Lead::orderBy('id', 'desc')->paginate(25);
         }else{
-           $leads= Lead::where('assing_user_id',$userId)->orderBy('id', 'desc')->paginate(10);
+           $leads= Lead::where('assing_user_id',$userId)->orderBy('id', 'desc')->paginate(25);
         }
 
         $users = User::where('active','1')->whereNotIn('id', [1])->get();
@@ -114,10 +115,31 @@ class LeadController extends Controller
        
         $lead_id = $request->lead_id;
         $user_id = $request->user_id;
+
+        $userCredits = UserCredit::where('user_id', $user_id)->latest()->first();
         
-        $lead = Lead::where('id', $lead_id)->update(['assing_user_id'=>$user_id]);
+        if($userCredits){
+           $unUsedCredit = $userCredits->unused_credits;
+           $UsedCredit = $userCredits->used_credits;
+           //dd($unUsedCredit);
+           if($unUsedCredit > 0){
+                $balanceCredit = $unUsedCredit - 10;
+                $userUsedCredit = $UsedCredit + 10;
+                
+                UserCredit::where('user_id',$user_id)->orderBy('id','desc')
+                ->take(1)->update(['used_credits' => $userUsedCredit, 'unused_credits' => $balanceCredit]);
+
+                $lead = Lead::where('id', $lead_id)->update(['assing_user_id'=>$user_id]);
+                
+                return response()->json(['success'=>'Lead assing successfully.']);
+            }else{
+                dd('User 0 credit');
+            }
+        }else{
+            return response()->json(['error'=>'User has no credit.']);
+        }
         
-        return $lead;
+        //return $lead;
     }
 
 
