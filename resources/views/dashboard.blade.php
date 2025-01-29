@@ -49,9 +49,9 @@
                               </div>
                           </div>
                           <div class="media-body media-doller">
-                              <span class="m-0">Earnings</span>
-                              <h3 class="mb-0">$ <span class="counter">665</span><small> This
-                                      Month</small>
+                              <span class="m-0">Leads</span>
+                              <h3 class="mb-0"><span class="counter">{{$data['todayLead']}}</span><small> Today
+                                      </small>
                               </h3>
                           </div>
                       </div>
@@ -72,10 +72,11 @@
                               </div>
                           </div>
                           <div class="media-body media-doller">
-                              <span class="m-0">Products</span>
-                              <h3 class="mb-0">$ <span class="counter">985</span><small> This
+                              <span class="m-0">Leads</span>
+                              <h3 class="mb-0"><span class="counter">{{$data['monthLead']}}</span><small> This
                                       Month</small>
                               </h3>
+                              <p>{{$data['LeadMonthGrowth']}} <span><i class="fa fa-angle-{{($data['leadConvertRate'])?'up':'down'}}"></i></span></p>
                           </div>
                       </div>
                   </div>
@@ -90,9 +91,8 @@
                                       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                                   </svg></div>
                           </div>
-                          <div class="media-body media-doller"><span class="m-0">Messages</span>
-                              <h3 class="mb-0">$ <span class="counter">893</span><small> This
-                                      Month</small></h3>
+                          <div class="media-body media-doller"><span class="m-0">Leads</span>
+                              <h3 class="mb-0"> <span class="counter">{{$data['yearleadCount']}}</span><small>This Year</small></h3>
                           </div>
                       </div>
                   </div>
@@ -110,14 +110,73 @@
                                       <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                   </svg></div>
                           </div>
-                          <div class="media-body media-doller"><span class="m-0">New Vendors</span>
-                              <h3 class="mb-0">$ <span class="counter">563</span><small> This
+                          <div class="media-body media-doller"><span class="m-0">Converted Lead</span>
+                              <h3 class="mb-0"><span class="counter">{{$data['convertedLead']}}</span><small> This
                                       Month</small></h3>
+                                      <p>{{$data['leadConvertRate']}}% <span><i class="fa fa-angle-{{($data['leadConvertRate'])?'up':'down'}}"></i></span></p>
                           </div>
                       </div>
                   </div>
               </div>
           </div>
+
+          <!-- Start -->
+          <div class="col-xl-6 xl-100">
+                            <div class="card height-equal" style="min-height: 516px;">
+                                <div class="card-header">
+                                    <h5>Sales Performance</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="icofont icofont-simple-left"></i></li>
+                                            <li><i class="view-html fa fa-code"></i></li>
+                                            <li><i class="icofont icofont-maximize full-card"></i></li>
+                                            <li><i class="icofont icofont-minus minimize-card"></i></li>
+                                            <li><i class="icofont icofont-refresh reload-card"></i></li>
+                                            <li><i class="icofont icofont-error close-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="user-status table-responsive products-table">
+                                        <table class="table table-bordernone mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Representative</th>
+                                                    <th scope="col">Deals Closed</th>
+                                                    <th scope="col">Leads</th>
+                                                    <th scope="col" style="width:100px;">Rate (%)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @can('User access')
+                                            @foreach($data['userList'] as $user)
+                                                <tr>
+                                                    <td class="bd-t-none u-s-tb">
+                                                        <div class="align-middle image-sm-size">                                                            <div class="d-inline-block">
+                                                                <h6 class="mb-0">{{$user->name}}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ $user->convertedLead }}</td>
+                                                    <td>{{ $user->leads->count()  }}</td>
+                                                    <td class="digits">
+                                                            @php
+                                                            $lcr = conversion_rate($user->convertedLead, $user->leads->count());
+                                                            echo $lcr;
+                                                            @endphp
+                                                        <i class="fa fa-angle-{{($lcr>0)?'up':'down'}}"></i>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            @endcan    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+          <!--  End -->
       </div>
+
   </div>
   @endsection

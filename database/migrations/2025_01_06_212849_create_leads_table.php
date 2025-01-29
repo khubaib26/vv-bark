@@ -42,8 +42,8 @@ class CreateLeadsTable extends Migration
             $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')->references('id')->on('lead_statuses');
             
-            $table->unsignedBigInteger('assing_user_id');
-            $table->foreign('assing_user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             
             $table->integer('creator_id')->default('0');
 

@@ -54,4 +54,9 @@ class User extends Authenticatable
         return $this->hasMany(UserCredit::class)->latest();
     } 
 
+    public function leads()
+    {
+        return $this->hasMany(Lead::class);
+    } 
+
 }

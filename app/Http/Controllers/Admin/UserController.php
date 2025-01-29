@@ -33,7 +33,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user= User::latest()->get();
+        $user= User::where('id', '!=', '1')->latest()->get();
 
         return view('setting.user.index',['users'=>$user]);
     }

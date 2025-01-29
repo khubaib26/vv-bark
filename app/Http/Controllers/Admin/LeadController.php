@@ -34,9 +34,9 @@ class LeadController extends Controller
          
         if(Auth::user()->hasRole('admin'))
         {
-           $leads= Lead::orderBy('id', 'desc')->paginate(25);
+           $leads= Lead::orderBy('id', 'desc')->paginate(40);
         }else{
-           $leads= Lead::where('assing_user_id',$userId)->orderBy('id', 'desc')->paginate(25);
+           $leads= Lead::where('assing_user_id',$userId)->orderBy('id', 'desc')->paginate(40);
         }
 
         $users = User::where('active','1')->whereNotIn('id', [1])->get();
@@ -129,7 +129,7 @@ class LeadController extends Controller
                 UserCredit::where('user_id',$user_id)->orderBy('id','desc')
                 ->take(1)->update(['used_credits' => $userUsedCredit, 'unused_credits' => $balanceCredit]);
 
-                $lead = Lead::where('id', $lead_id)->update(['assing_user_id'=>$user_id]);
+                $lead = Lead::where('id', $lead_id)->update(['user_id'=>$user_id]);
                 
                 return response()->json(['success'=>'Lead assing successfully.']);
             }else{

@@ -73,7 +73,7 @@
                                     <select class='assingUser form-select' name="assingUser" data-cxm-lead-id="{{$lead->id}}">
                                         <option value="">Select User</option>
                                         @foreach($users as $user)
-                                        <option value="{{ $user->id }}" {{ ($user->id == $lead->assing_user_id)  ? 'selected' : '' }}>{{ $user->name }}</option>
+                                        <option value="{{ $user->id }}" {{ ($user->id == $lead->user_id)  ? 'selected' : '' }}>{{ $user->name }}</option>
                                         @endforeach
                                     </select>
                                     @endcan
