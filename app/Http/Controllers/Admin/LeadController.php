@@ -36,7 +36,7 @@ class LeadController extends Controller
         {
            $leads= Lead::orderBy('id', 'desc')->paginate(40);
         }else{
-           $leads= Lead::where('assing_user_id',$userId)->orderBy('id', 'desc')->paginate(40);
+           $leads= Lead::where('user_id',$userId)->orderBy('id', 'desc')->paginate(40);
         }
 
         $users = User::where('active','1')->whereNotIn('id', [1])->get();

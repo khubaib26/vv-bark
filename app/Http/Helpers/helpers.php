@@ -28,10 +28,10 @@ function get_percentage($total, $number){
 // Growth Calculation Function
 function growth_calculation($currentMonth, $lastMonth){
     if($lastMonth == 0){
-        return number_format(0, 2).'%';  
+        return number_format(0, 2);  
     }else{
         $growth = ($currentMonth - $lastMonth) / $lastMonth * 100;
-        return number_format($growth, 2).'%';
+        return number_format($growth, 2);
     } 
 }
 

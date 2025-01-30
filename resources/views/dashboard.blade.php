@@ -76,7 +76,7 @@
                               <h3 class="mb-0"><span class="counter">{{$data['monthLead']}}</span><small> This
                                       Month</small>
                               </h3>
-                              <p>{{$data['LeadMonthGrowth']}} <span><i class="fa fa-angle-{{($data['leadConvertRate'])?'up':'down'}}"></i></span></p>
+                              <p>{{$data['LeadMonthGrowth']}} <span><i class="fa fa-angle-{{($data['LeadMonthGrowth'])?'up':'down'}}"></i></span></p>
                           </div>
                       </div>
                   </div>
@@ -121,7 +121,8 @@
           </div>
 
           <!-- Start -->
-          <div class="col-xl-6 xl-100">
+        @can('User access')
+        <div class="col-xl-6 xl-100">
                             <div class="card height-equal" style="min-height: 516px;">
                                 <div class="card-header">
                                     <h5>Sales Performance</h5>
@@ -148,7 +149,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @can('User access')
+                                            
                                             @foreach($data['userList'] as $user)
                                                 <tr>
                                                     <td class="bd-t-none u-s-tb">
@@ -168,15 +169,66 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                            @endcan    
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-          <!--  End -->
-      </div>
-
-  </div>
+        <!--  End -->
+        </div>
+        @endcan
+        @can('Lead access')
+        <div class="col-xl-12 xl-100">
+            <div class="card height-equal" style="min-height: 516px;">
+                <div class="card-header">
+                    <h5>Leads Report</h5>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="icofont icofont-simple-left"></i></li>
+                            <li><i class="view-html fa fa-code"></i></li>
+                            <li><i class="icofont icofont-maximize full-card"></i></li>
+                            <li><i class="icofont icofont-minus minimize-card"></i></li>
+                            <li><i class="icofont icofont-refresh reload-card"></i></li>
+                            <li><i class="icofont icofont-error close-card"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="user-status table-responsive products-table">
+                        <table class="table table-bordernone mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Brand</th>
+                                    <th scope="col">Contact</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Assing Lead</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($data['recentLeads'] as $lead)
+                                    <tr>
+                                        <td><img src="{{$lead->brand->logo}}" width="100"><br>{{$lead->brand->name}}</td>
+                                        <td class="digits">{{ $lead->name }}<br>
+                                                {{ $lead->email }}<br>
+                                                {{ $lead->phone }}
+                                        </td>
+                                        <td class="font-primary"> 
+                                            {{$lead->created_at->format('j F, Y')}}
+                                            <br>{{$lead->created_at->format('h:i:s A')}}
+                                            <br>{{$lead->created_at->diffForHumans()}}
+                                        </td>
+                                        <td class="digits">{{ $lead->user->name ?? 'None' }}</td>
+                                        <td class="digits">{{ $lead->status->status ?? 'None' }}</td>
+                                        <td class="digits">${{ $lead->value }}</td>
+                                    </tr>
+                                @endforeach     
+                            </tbody>
+                        </table>
+                    </div>                            
+            </div>  
+        </div>
+        @endcan
   @endsection

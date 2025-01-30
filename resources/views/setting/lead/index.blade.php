@@ -44,7 +44,7 @@
                                 <th scope="col">Contact</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Platform</th>
-                                <th scope="col">Assing Lead</th>
+                                @can('Lead assign')<th scope="col">Assing Lead</th>@endcan
                                 <th scope="col">Value</th>
                                 <th scope="col">Status</th>
                                 <th scope="col" style="width:200px;">Actions</th>
@@ -68,16 +68,16 @@
                                     <br>{{$lead->created_at->diffForHumans()}}
                                 </td>
                                 <td>{{ $lead->platform }}</td>
+                                @can('Lead assign')
                                 <td>
-                                    @can('Lead assign')
                                     <select class='assingUser form-select' name="assingUser" data-cxm-lead-id="{{$lead->id}}">
                                         <option value="">Select User</option>
                                         @foreach($users as $user)
                                         <option value="{{ $user->id }}" {{ ($user->id == $lead->user_id)  ? 'selected' : '' }}>{{ $user->name }}</option>
                                         @endforeach
                                     </select>
-                                    @endcan
                                 </td>
+                                @endcan
                                 <td>${{ $lead->value }}</td>
                                 <td>{{ $lead->status->status ?? 'None' }}</td>
                                 <td class="d-flex flex-row">
