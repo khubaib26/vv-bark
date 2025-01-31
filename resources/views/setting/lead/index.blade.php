@@ -46,7 +46,7 @@
                                 <th scope="col">Platform</th>
                                 @can('Lead assign')<th scope="col">Assing Lead</th>@endcan
                                 <th scope="col">Value</th>
-                                <th scope="col">Status</th>
+                                @can('Lead status')<th scope="col">Status</th>@endcan
                                 <th scope="col" style="width:200px;">Actions</th>
                             </tr>
                         </thead>
@@ -79,7 +79,17 @@
                                 </td>
                                 @endcan
                                 <td>${{ $lead->value }}</td>
-                                <td>{{ $lead->status->status ?? 'None' }}</td>
+                                @can('Lead status')
+                                <td>
+                                    {{-- $lead->status->status ?? 'None' --}} 
+                                    <select class='changeStatus form-select' name="lead_status" data-cxm-lead-id="{{$lead->id}}">
+                                        <option value="">Select Status</option>
+                                        @foreach($status as $stat)
+                                        <option value="{{ $stat->id }}" {{ ($stat->id == $lead->status_id)  ? 'selected' : '' }}>{{ $stat->status }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                @endcan
                                 <td class="d-flex flex-row">
                                     @can('Lead edit')
                                     <a href="{{ route('admin.leads.edit',$lead->id) }}" class="btn-sm btn-success"><i class="fa fa-pencil text-white"></i></a>
@@ -98,12 +108,11 @@
                             @endcan
                         </tbody>
                     </table>
-                   {{-- @can('Lead access')
+                    @can('Lead access')
                         <div class="dataTables_paginate paging_simple_numbers" id="basic-1_paginate">
                             {{ $leads->links() }}
                         </div>
-                    @endcan --}}
-
+                    @endcan
                     <!-- End Default Table Example -->
                 </div>
             </div>

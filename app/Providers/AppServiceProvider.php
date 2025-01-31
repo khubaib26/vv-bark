@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Mailsetting;
+use Illuminate\Pagination\Paginator;
 
 use Config;
 
@@ -44,5 +45,7 @@ class AppServiceProvider extends ServiceProvider
                 Config::set('mail',$data);
             }
         }
+
+        Paginator::useBootstrap();
     }
 }

@@ -21,7 +21,7 @@ class DashboardController extends Controller
         // Current User Login
         $userId = Auth::user()->id;
         $isAdmin = true;
-        if(!Auth::user()->hasRole('admin')){ $isAdmin = false;}
+        if(!Auth::user()->hasRole('admin')){ $isAdmin = false; }
 
         // $posts = DB::table('posts')
         //     ->when(!$isAdmin, function ($query) use ($userId) {

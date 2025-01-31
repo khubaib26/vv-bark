@@ -76,6 +76,8 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')-
         //Leads Routes
         Route::resource('leads','LeadController');
         Route::get('/lead-Assign-User',[LeadController::class, 'assign_user'])->name('leadAssingUser');
+        Route::get('/changeleadStatus', [LeadController::class, 'leadStatus'])->name('changeLeadStatus');
+
 
         Route::get('/profile',[ProfileController::class,'index'])->name('profile');
         Route::put('/profile-update',[ProfileController::class,'update'])->name('profile.update');

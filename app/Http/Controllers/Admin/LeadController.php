@@ -41,6 +41,7 @@ class LeadController extends Controller
 
         $users = User::where('active','1')->whereNotIn('id', [1])->get();
         $status = LeadStatus::all();
+
         return view('setting.lead.index',['leads'=>$leads, 'users'=>$users, 'status'=>$status]);
     }
 
@@ -121,7 +122,7 @@ class LeadController extends Controller
         if($userCredits){
            $unUsedCredit = $userCredits->unused_credits;
            $UsedCredit = $userCredits->used_credits;
-           //dd($unUsedCredit);
+           
            if($unUsedCredit > 0){
                 $balanceCredit = $unUsedCredit - 10;
                 $userUsedCredit = $UsedCredit + 10;
@@ -133,13 +134,11 @@ class LeadController extends Controller
                 
                 return response()->json(['success'=>'Lead assing successfully.']);
             }else{
-                dd('User 0 credit');
+                return response()->json(['success'=>'User has no credit.']);
             }
         }else{
             return response()->json(['error'=>'User has no credit.']);
         }
-        
-        //return $lead;
     }
 
 
@@ -185,6 +184,22 @@ class LeadController extends Controller
             'data' => $leads,
             'message' => 'Add Lead Successfully Created!'
         ], 200);    
+    }
+
+    public function leadStatus(Request $request)
+    {
+        $userId = Auth::user()->id;
+         
+        $leadId = $request->lead_id;
+        $status = $request->LeadStatus;
+ 
+        $lead = Lead::find($leadId);
+        $lead->status_id = $status;
+        $lead->status_update_uid = $userId;
+        $lead->status_update_dt  = time();
+        $lead->save();
+
+        return $lead;
     }
 
 

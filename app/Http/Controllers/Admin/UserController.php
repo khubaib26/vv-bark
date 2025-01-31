@@ -77,7 +77,7 @@ class UserController extends Controller
         ]);
 
         $user->syncRoles($request->roles);
-        //dd($user);
+        
         return redirect()->back()->withSuccess('User created !!!');
     }
 
