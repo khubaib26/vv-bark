@@ -16,8 +16,14 @@ class LeadStatus extends Model
     protected $fillable = ['status','leadstatus_color'];
     protected $dates = ['deleted_at'];
 
-    public function leads()
-    {
-        return $this->hasMany(Lead::class);
-    }  
+    // public function leads()
+    // {
+    //     return $this->hasMany(Lead::class);
+    // } 
+    
+     // LeadStatus ke leads
+     public function leads()
+     {
+         return $this->hasMany(Lead::class, 'status_id');
+     }
 }

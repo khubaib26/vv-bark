@@ -158,11 +158,11 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>{{ $user->convertedLead }}</td>
-                                                    <td>{{ $user->leads->count()  }}</td>
+                                                    <td>{{ $user->current_month_converted_leads_count }} {{-- $user->convertedLead --}}</td>
+                                                    <td>{{ $user->current_month_leads_count }}{{-- $user->leads->count()  --}}</td>
                                                     <td class="digits">
                                                             @php
-                                                            $lcr = conversion_rate($user->convertedLead, $user->leads->count());
+                                                            $lcr = conversion_rate($user->current_month_converted_leads_count, $user->current_month_leads_count);
                                                             echo $lcr;
                                                             @endphp
                                                         <i class="fa fa-angle-{{($lcr>0)?'up':'down'}}"></i>
@@ -231,7 +231,65 @@
             </div>  
         </div>
         @endcan
-
-        
-        
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Sales Status</h5>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="icofont icofont-simple-left"></i></li>
+                            <li><i class="view-html fa fa-code"></i></li>
+                            <li><i class="icofont icofont-maximize full-card"></i></li>
+                            <li><i class="icofont icofont-minus minimize-card"></i></li>
+                            <li><i class="icofont icofont-refresh reload-card"></i></li>
+                            <li><i class="icofont icofont-error close-card"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xl-6 col-sm-6 xl-50">
+                            <div class="order-graph sm-order-space">
+                                <h6>Sales By Location</h6>
+                                <div class="peity-chart-dashboard text-center">
+                                    <span class="pie-colours-1" style="display: none;">4,7,6,5</span><svg class="peity" height="180" width="250"><path d="M 125 0 A 60 60 0 0 1 179.57791972127112 35.075099219886816 L 125 60" fill="#ec8951"></path><path d="M 179.57791972127112 35.075099219886816 A 60 60 0 0 1 125 120 L 125 60" fill="#02cccd"></path><path d="M 125 120 A 60 60 0 0 1 65.61071348714404 51.4611097036029 L 125 60" fill="#ffbc58"></path><path d="M 65.61071348714404 51.4611097036029 A 60 60 0 0 1 124.99999999999999 0 L 125 60" fill="#a5a5a5"></path></svg>
+                                </div>
+                                <div class="order-graph-bottom sales-location">
+                                    <div class="media">
+                                        <div class="order-shape-primary"></div>
+                                        <div class="media-body">
+                                            <h6 class="mb-0 me-0">Germany <span class="pull-right">25%</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="order-shape-secondary"></div>
+                                        <div class="media-body">
+                                            <h6 class="mb-0 me-0">Brasil <span class="pull-right">10%</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="order-shape-danger"></div>
+                                        <div class="media-body">
+                                            <h6 class="mb-0 me-0">United Kingdom<span class="pull-right">34%</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="order-shape-warning"></div>
+                                        <div class="media-body">
+                                            <h6 class="mb-0 me-0">Australia<span class="pull-right">5%</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="order-shape-success"></div>
+                                        <div class="media-body">
+                                            <h6 class="mb-0 me-0">Canada <span class="pull-right">25%</span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>      
   @endsection

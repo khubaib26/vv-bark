@@ -89,6 +89,24 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        $user = User::with(['leads'])->find($id);
+
+        // $usersStatus = User::with(['leads' => function ($query) {
+        //     $query->select('user_id', 'lead_statuses')
+        //           ->selectRaw('count(*) as lead_count')
+        //           ->groupBy('user_id', 'status');
+        // }])->get();
+
+        // User ke leads ko lead status ke sath count karein
+        // $usersStatus = User::with(['leads' => function ($query) {
+        //     $query->select('user_id', 'status_id')
+        //         ->with('status') // Lead status ko load karein
+        //         ->groupBy('status_id')
+        //         ->selectRaw('status_id, count(*) as lead_count');
+        // }])->get();
+
+        // dd($usersStatus);
+        return view('setting.user.profile',['user'=>$user]);
         //
     }
 
@@ -100,8 +118,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $role = Role::get();
-        $user->roles;
+       $role = Role::get();
+       $user->roles;
        return view('setting.user.edit',['user'=>$user,'roles' => $role]);
     }
 

@@ -59,4 +59,10 @@ class User extends Authenticatable
         return $this->hasMany(Lead::class);
     } 
 
+     // Converted Leads relationship
+    public function convertedLeads()
+    {
+         return $this->hasMany(Lead::class)->where('status_id', '2');
+    }
+
 }

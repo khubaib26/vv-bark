@@ -14,10 +14,10 @@ class Lead extends Model
     protected $primaryKey = 'id'; 
     protected $guarded = [];
 
-    public function status()
-    {
-        return $this->belongsTo(LeadStatus::class);
-    }
+    // public function status()
+    // {
+    //     return $this->belongsTo(LeadStatus::class);
+    // }
 
     public function brand()
     {
@@ -27,5 +27,11 @@ class Lead extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    // Lead ka status
+    public function status()
+    {
+        return $this->belongsTo(LeadStatus::class, 'status_id');
     }
 }

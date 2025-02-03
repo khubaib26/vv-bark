@@ -56,6 +56,13 @@
     <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
     <script src="{{ asset('assets/js/admin-script.js') }}"></script>
 
+    <!--peity chart js-->
+    <script src="{{ asset('assets/js/chart/peity-chart/peity.jquery.js') }}"></script>
+    <!-- Apex Chart Js -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!--sparkline chart js-->
+    <script src="{{ asset('assets/js/chart/sparkline/sparkline.js') }}"></script>
+
     <!-- cxm Scripts -->
     @stack('cxmScripts')
 

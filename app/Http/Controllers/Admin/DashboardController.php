@@ -61,12 +61,30 @@ class DashboardController extends Controller
         //End Stats Functions
 
         // User List 
+        // $users = User::where('id', '!=', '1')
+        //     ->withCount([
+        //     'leads as convertedLead' => function ($query) {
+        //         $query->where('status_id', 2);
+        //     }
+        // ])->get();
+
         $users = User::where('id', '!=', '1')
-            ->withCount([
-            'leads as convertedLead' => function ($query) {
-                $query->where('status_id', 2);
+        ->withCount([
+            'leads as current_month_leads_count' => function ($query) {
+                $query->whereMonth('created_at', now()->month)
+                      ->whereYear('created_at', now()->year);
+            },
+            'convertedLeads as current_month_converted_leads_count' => function ($query) {
+                $query->whereMonth('created_at', now()->month)
+                      ->whereYear('created_at', now()->year);
             }
         ])->get();
+
+        
+
+
+
+
 
         // Recents Leads    
         if(Auth::user()->hasRole('admin')){

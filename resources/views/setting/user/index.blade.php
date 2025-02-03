@@ -99,6 +99,7 @@
                                         </form>
                                         @endcan
                                         <button type="button" data-id="{{$user->id}}" class="btn-sm btn-primary userCredit" data-bs-toggle="modal" data-bs-target="#creditModal"><i class="fa-solid fa-credit-card"></i></i></button>
+                                        <a href="{{ route('admin.users.show',$user->id) }}" title="Profile"><i class="fa-solid fa-credit-card"></i></i></a>
                                     </div>
                                 </td>
                             </tr>
