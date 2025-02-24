@@ -9,7 +9,6 @@
 @endsection
 
 @section('content')
-
 <div class="container-fluid">
     <div class="page-header">
         <div class="row">
@@ -18,15 +17,15 @@
                     <h3>Dashboard
                     </h3>
                 </div>
-                <li class="breadcrumb-item">Permissions</li>
-                <li class="breadcrumb-item active">List</li>
+                <li class="breadcrumb-item">User</li>
+                <li class="breadcrumb-item active">Profile</li>
             </div>
         </div>
     </div>
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xl-4">
+        <div class="col-xl-3">
             <div class="card">
                 <div class="card-body">
                     <div class="profile-details text-center">
@@ -38,15 +37,17 @@
                     <hr>
                     <div class="project-status">
                         <h5 class="f-w-600">Lead Status</h5>
+                        @foreach($statusData as $status)
                         <div class="media">
                             <div class="media-body">
-                                <h6>Performance<span class="pull-right">80%</span></h6>
+                                <h6>{{$status->status}}<span class="pull-right">{{$status->leadCount}}</span></h6>
                                 <div class="progress sm-progress-bar">
                                     <div class="progress-bar bg-primary" role="progressbar" style="width: 90%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="media">
+                        @endforeach
+                        <!-- <div class="media">
                             <div class="media-body">
                                 <h6>Overtime <span class="pull-right">60%</span></h6>
                                 <div class="progress sm-progress-bar">
@@ -61,16 +62,18 @@
                                     <div class="progress-bar bg-danger" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-8">
+        <div class="col-xl-9">
             <div class="card tab2-card">
                 <div class="card-body">
                     <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
                         <li class="nav-item"><a class="nav-link active" id="top-profile-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-controls="top-profile" aria-selected="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user me-2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Profile</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link " id="top-lead-tab" data-bs-toggle="tab" href="#top-lead" role="tab" aria-controls="top-profile" aria-selected="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user me-2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Lead</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings me-2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>Contact</a>
                         </li>
@@ -102,6 +105,48 @@
                                             <td>{{ $user->phone }}</td>
                                         </tr>
                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="top-lead" role="tabpanel" aria-labelledby="top-lead-tab">
+                            <h5 class="f-w-600">Lead</h5>
+                            <div class="table-responsive profile-table">
+                                <table class="table table-borderless">
+                                    
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="width:50px;">ID #</th>
+                                        <th scope="col" style="width:200px;">Brand</th>
+                                        <th scope="col">Contact</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Platform</th>
+                                        <th scope="col">Value</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                        @foreach($user->leads as $lead)
+                                        <tr>
+                                            <th scope="row">{{ $lead->id }}</th>
+                                            <td>
+                                                <img src="{{$lead->brand->logo}}" width="100"><br>{{$lead->brand->name}}
+                                            </td>
+                                            <td>{{ $lead->name }}<br>
+                                                {{ $lead->email }}<br>
+                                                {{ $lead->phone }}
+                                            </td>
+                                            <td>
+                                                {{$lead->created_at->format('j F, Y')}}
+                                                <br>{{$lead->created_at->format('h:i:s A')}}
+                                                <br>{{$lead->created_at->diffForHumans()}}
+                                            </td>
+                                            <td>{{ $lead->platform }}</td>
+                                            <td>${{ $lead->value }}</td>
+                                            <td>{{ $lead->status->status ?? 'None' }}</td>
+                                        </tr>
+                                        @endforeach
+                                        
                                     </tbody>
                                 </table>
                             </div>

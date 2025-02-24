@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Lead;
+use App\Models\LeadStatus;
 use App\Models\UserCredit;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Carbon\Carbon;
+use Auth;
 
 
 
@@ -88,25 +92,30 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    { 
+       
         $user = User::with(['leads'])->find($id);
+       
+        $leadStatus =  LeadStatus::all();
+        $statusData = array();
+        foreach($leadStatus as $status){
+            $leads = Lead::where(['status_id' => $status->id, 'user_id'=>$id])
+                    ->whereYear('created_at', Carbon::now()->year) // Count month Lead
+                    ->whereMonth('created_at', Carbon::now()->month)
+                    ->count();
+            $lastMonthLeads = Lead::where(['status_id' => $status->id, 'user_id'=>$id])
+                    ->whereYear('created_at', Carbon::now()->year) // Count month Lead
+                    ->whereMonth('created_at', Carbon::now()->subMonth()->month)
+                    ->count(); 
+            $growth = growth_calculation($leads,$lastMonthLeads);               
+                    
+            $status['leadCount'] = $leads;
+            $status['growth'] = $growth;  
 
-        // $usersStatus = User::with(['leads' => function ($query) {
-        //     $query->select('user_id', 'lead_statuses')
-        //           ->selectRaw('count(*) as lead_count')
-        //           ->groupBy('user_id', 'status');
-        // }])->get();
+            array_push($statusData, $status); // current month
+        }
 
-        // User ke leads ko lead status ke sath count karein
-        // $usersStatus = User::with(['leads' => function ($query) {
-        //     $query->select('user_id', 'status_id')
-        //         ->with('status') // Lead status ko load karein
-        //         ->groupBy('status_id')
-        //         ->selectRaw('status_id, count(*) as lead_count');
-        // }])->get();
-
-        // dd($usersStatus);
-        return view('setting.user.profile',['user'=>$user]);
+        return view('setting.user.profile',['user'=>$user, 'statusData' => $statusData]);
         //
     }
 

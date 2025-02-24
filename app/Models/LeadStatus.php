@@ -21,9 +21,11 @@ class LeadStatus extends Model
     //     return $this->hasMany(Lead::class);
     // } 
     
-     // LeadStatus ke leads
-     public function leads()
-     {
-         return $this->hasMany(Lead::class, 'status_id');
-     }
+    // LeadStatus ke leads
+    public function leads()
+    {
+        return $this->hasMany(Lead::class, 'status_id');
+    }
+
+    
 }
